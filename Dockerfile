@@ -3,8 +3,7 @@ FROM python:3.8.2-buster
 RUN mkdir -p /opt/discord-bot/
 WORKDIR /opt/discord-bot/
 
-COPY .env .
-COPY bot.py .
+COPY . .
 RUN ls -ltra
 
 RUN pip install discord.py

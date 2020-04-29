@@ -1,10 +1,11 @@
 # Discord Bot
 
-## Env variables
+## Environment variables
+Create a `.env` file with the following variables:
 ```
-export DISCORD_CHANNEL={bot-token}
-export DISCORD_GUILD={server-id}
-export DISCORD_TOKEN={channel-id}
+DISCORD_CHANNEL={bot-token}
+DISCORD_GUILD={server-id}
+DISCORD_TOKEN={channel-id}
 ```
 
 ## Docker
@@ -12,7 +13,7 @@ Build image:
 ```bash
 docker build -t discord-bot .
 ```
-Init swarm:
+Docker Compose:
 ```bash
 docker stack deploy -c discord-bot.yml discord
 ```

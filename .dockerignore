@@ -1,4 +1,9 @@
 README.md
+*.yml
+
+# Git
+.git
+.gitignore
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
