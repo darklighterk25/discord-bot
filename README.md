@@ -3,9 +3,9 @@
 ## Environment variables
 Create a `.env` file with the following variables:
 ```
-DISCORD_CHANNEL={bot-token}
+DISCORD_CHANNEL={channel-id}
 DISCORD_GUILD={server-id}
-DISCORD_TOKEN={channel-id}
+DISCORD_TOKEN={bot-token}
 ```
 
 ## Docker
