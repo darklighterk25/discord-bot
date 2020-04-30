@@ -2,8 +2,12 @@ name: Docker Image CI
 
 on:
   push:
+    tags:
+      - 'v*.*.*'
     branches: [ master ]
   pull_request:
+    tags:
+      - 'v*.*.*'
     branches: [ master ]
 
 jobs:
@@ -15,4 +19,14 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build -t discord-bot:$(date +%s) .
+      run: |
+        docker build -t discord-bot:latest .
+    - name: DockerHub login
+      env:
+        DOCKER_USER: ${{ secrets.DOCKER_USER }} 
+        DOCKER_PASSOWRD: ${{ secrets.DOCKER_PASSWORD }}
+      run: |
+        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+    - name: Publish image in DockerHub
+      run: |
+        docker push darklighterk25/discord-bot:latest
