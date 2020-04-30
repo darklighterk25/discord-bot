@@ -20,7 +20,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build the Docker image
       run: |
-        docker build -t discord-bot:latest .
+        docker build -t darklighterk25/discord-bot:latest .
     - name: DockerHub login
       env:
         DOCKER_USER: ${{ secrets.DOCKER_USER }} 

@@ -1,4 +1,4 @@
 version: "3.8"
 services:
   bot:
-    image: discord-bot
+    image: darklighterk25/discord-bot

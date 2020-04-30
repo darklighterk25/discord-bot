@@ -11,7 +11,7 @@ DISCORD_TOKEN={bot-token}
 ## Docker
 Build image:
 ```bash
-docker build -t discord-bot .
+docker build -t darklighterk25/discord-bot .
 ```
 Docker Compose:
 ```bash
