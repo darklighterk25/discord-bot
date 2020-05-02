@@ -4,14 +4,25 @@ import os
 import discord
 from discord.ext import commands
 
+# Cogs.
+from cogs.test import Test
+from cogs.advise import Advise
+
 # Environment variables.
 from dotenv import load_dotenv
+
 load_dotenv()
-CHANNEL = int(os.getenv('DISCORD_CHANNEL')) # ⚠ Must be an integer.
+
+CHANNEL = int(os.getenv('DISCORD_CHANNEL'))  # ⚠ Must be an integer.
+ENV = os.getenv('ENV')
 GUILD = os.getenv('DISCORD_GUILD')
 TOKEN = os.getenv('DISCORD_TOKEN')
 
 bot = commands.Bot(command_prefix='!')
+
+bot.add_cog(Test(bot))
+bot.add_cog(Advise(bot))
+
 
 @bot.event
 async def on_ready():
@@ -19,20 +30,27 @@ async def on_ready():
     for guild in bot.guilds:
         if guild.name == GUILD:
             break
-    print(f'\033[94m{bot.user} successfully connected to {guild.name}!\033[0m 😎')
-    activity = discord.Activity(name='the world end ☣', type=discord.ActivityType.watching)
+    print(
+        f'\033[94m{bot.user} successfully connected to {guild.name}!\033[0m 😎')
+
+    await change_presence()
+    if ENV == 'prod':
+        await send_test_message()
+
+
+async def change_presence():
+    activity = discord.Activity(
+        name='the world end ☣', type=discord.ActivityType.watching)
     await bot.change_presence(activity=activity)
+
+
+async def send_test_message():
     channel = bot.get_channel(CHANNEL)
+    print('\033[94mTrying to send message to channel...\033[0m 🤞')
     try:
-        print('\033[94mTrying to send message to channel...\033[0m 🤞')
         await channel.send('I\'m alive! 😀')
         print(f'\033[92mMessage sent to {channel.name}!\033[0m 😀')
     except:
         print(f'\033[91mInvalid channel id!\033[0m 😭')
-
-@bot.command(name='test')
-async def test(ctx):
-    """Simple test command."""
-    await ctx.send('It worked! 👌')
 
 bot.run(TOKEN)
