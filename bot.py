@@ -25,9 +25,20 @@ async def on_ready():
             break
     print(
         f'\033[94m{bot.user} successfully connected to {guild.name}!\033[0m 😎')
+    
+    await change_presence()
+    await send_test_message()
+
+    bot.add_cog(Test(bot))
+
+
+async def change_presence():
     activity = discord.Activity(
         name='the world end ☣', type=discord.ActivityType.watching)
     await bot.change_presence(activity=activity)
+
+
+async def send_test_message():
     channel = bot.get_channel(CHANNEL)
     print('\033[94mTrying to send message to channel...\033[0m 🤞')
     try:
@@ -35,6 +46,5 @@ async def on_ready():
         print(f'\033[92mMessage sent to {channel.name}!\033[0m 😀')
     except:
         print(f'\033[91mInvalid channel id!\033[0m 😭')
-    bot.add_cog(Test(bot))
 
 bot.run(TOKEN)
